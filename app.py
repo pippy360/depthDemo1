@@ -8,7 +8,7 @@ input_node = 0
 net = 0
 
 @app.route("/")
-def hello():
+def hell2o():
 	global g_sess
 	return "hey"
 
