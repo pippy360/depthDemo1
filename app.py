@@ -7,7 +7,7 @@ img = 0
 input_node = 0
 net = 0
 
-@app.route("/img")
+@app.route("/")
 def hello():
 	global g_sess
 	return "hey"
