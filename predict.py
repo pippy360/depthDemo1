@@ -45,21 +45,9 @@ def predict(model_data_path, image_path):
         pred = sess.run(net.get_output(), feed_dict={input_node: img})
         
         # Plot result
-	print "pred[0,:,:,0]"
-	print pred[0,:,:,0]
-	print np.amin(pred)
-	print np.amax(pred)
-	print pred[0].shape
-	print np.transpose(pred[0,:,:,0]).shape
-	print pred[0,:,:,0][0][0]
 	formatted = ((pred[0,:,:,0]) * 255 / np.max(pred[0,:,:,0])).astype('uint8')
 	img = Image.fromarray(formatted)
         img.save('my.png')
-	np.savetxt('txt.txt',pred[0,:,:,0])
-	fig = pyplot.figure()
-	ii = pyplot.imshow(pred[0,:,:,0], interpolation='nearest')
-	fig.colorbar(ii)
-	fig.savefig("somethign.png")
         return pred
         
                 

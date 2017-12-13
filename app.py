@@ -10,7 +10,7 @@ net = 0
 @app.route("/")
 def hell2o():
 	global g_sess
-	return "hey"
+	return flask.send_file('/home/tomnomnom12/depthDemo1/index.html')
 
 @app.route("/img")
 def hello():
