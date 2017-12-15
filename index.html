@@ -1,5 +1,15 @@
 <meta charset="utf-8"/>
+<style>
+img {
+width: 400px;
+height: 400px;
+}
 
+.dz-preview{
+display: none;
+
+}
+</style>
 <script>
 
 "use strict";
@@ -3508,6 +3518,9 @@ function __guardMethod__(obj, methodName, transform) {
 </script>
 
 <script>
+
+
+
 g_file = null
 Dropzone.options.myAwesomeDropzone = {
   paramName: "file", // The name that will be used to transfer the file
@@ -3516,17 +3529,47 @@ Dropzone.options.myAwesomeDropzone = {
     if (file.name == "justinbieber.jpg") {
       done("Naha, you don't.");
     }
-    else { done(); }
+    else {
+      var fileReader = new FileReader();
+fileReader.onload = function () {
+
+  file.dataURL = fileReader.result;
+
+var img = new Image();
+img.src = file.dataURL;
+
+
+document.querySelector("#list").appendChild(img)
+console.log(fileReader.result);
+};
+
+      fileReader.readAsDataURL(file);
+done(); }
   },
   success: function(file) {
 g_file = file
 var url = g_file.xhr.responseText;
+var img = new Image();
 img.src = 'data:image/png;base64,'+url;
 
 
 document.querySelector("#list").appendChild(img)
  }
 };
+
+
+function getDataUri(image) {
+        var canvas = document.createElement('canvas');
+        canvas.width = image.naturalWidth; // or 'width' if you want a special/scaled size
+        canvas.height = image.naturalHeight; // or 'height' if you want a special/scaled size
+
+        canvas.getContext('2d').drawImage(image, 0, 0);
+
+        // ... or get as Data URI
+return canvas.toDataURL('image/png');
+}
+
+
 </script>
 
 <form action="/img"
@@ -3534,4 +3577,4 @@ document.querySelector("#list").appendChild(img)
       id="my-awesome-dropzone"></form>
 
 
-<h1 id="list">check this out</h1>
+<h1 id="list"></h1>
