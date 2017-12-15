@@ -5,9 +5,25 @@ width: 400px;
 height: 400px;
 }
 
+#list{
+	float: left;
+	width: 402px;
+}
+
+#list2{
+	float: left;
+	width: 402px;
+}
+
 .dz-preview{
 display: none;
 
+}
+
+.dropzone {
+	width: 400px;
+	height: 160px;
+	border: 1px solid black; 
 }
 </style>
 <script>
@@ -3553,7 +3569,7 @@ var img = new Image();
 img.src = 'data:image/png;base64,'+url;
 
 
-document.querySelector("#list").appendChild(img)
+document.querySelector("#list2").appendChild(img)
  }
 };
 
@@ -3577,4 +3593,5 @@ return canvas.toDataURL('image/png');
       id="my-awesome-dropzone"></form>
 
 
-<h1 id="list"></h1>
+<div id="list"></div>
+<div id="list2"></div>
