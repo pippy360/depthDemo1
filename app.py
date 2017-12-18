@@ -19,6 +19,7 @@ net = 0
 def hell2o():
 	global g_sess
 	return flask.send_file('/home/tomnomnom12/depthDemo1/index.html')
+
 @app.route("/img", methods=['GET', 'POST'])
 def hello():
 	global g_sess
@@ -31,7 +32,12 @@ def hello():
 	batch_size = 1
 	file = request.files['file']
 	file.save('./my.png')
-	img = Image.open('./my.png')
+
+	png = Image.open('./my.png').convert('RGBA')
+	background = Image.new('RGBA', png.size, (255,255,255))
+
+	img = Image.alpha_composite(background, png)
+	img = img.convert('RGB')
 	img = img.resize([width,height], Image.ANTIALIAS)
 	img = np.array(img).astype('float32')
 	img = np.expand_dims(np.asarray(img), axis = 0)
